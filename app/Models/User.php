@@ -27,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'photo',
+        'roles'
     ];
 
     /**
@@ -38,7 +40,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'two_factor_recovery_codes',
-        'two_factor_secret',
+        'two_factor_secret'
     ];
 
     /**
@@ -47,7 +49,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $appends = [
-        'profile_photo_url',
+        'profile_photo_url'
     ];
 
     /**
@@ -59,7 +61,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'hashed'
         ];
     }
 }
