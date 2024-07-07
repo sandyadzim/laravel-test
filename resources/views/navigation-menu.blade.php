@@ -12,9 +12,19 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @php
+                        $menu = [
+                            (object) ['name' => 'Dashboard', 'route' => 'admin.dashboard'],
+                            (object) ['name' => 'Brand', 'route' => 'admin.brand.index'],
+                        ];
+                    @endphp
+
+
+                    @foreach ($menu as $item)
+                        <x-nav-link href="{{ route($item->route) }}" :active="request()->routeIs($item->route)">
+                            {{ __($item->name) }}
+                        </x-nav-link>
+                    @endforeach
                 </div>
             </div>
 
@@ -150,9 +160,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('admin.dashboard') }}" :active="request()->routeIs('admin.dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @foreach ($menu as $item)
+                <x-responsive-nav-link href="{{ route($item->route) }}" :active="request()->routeIs($item->route)">
+                    {{ __($item->name) }}
+                </x-responsive-nav-link>
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->
