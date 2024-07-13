@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BrandRequest;
-use App\Models\Brand;
+use App\Http\Requests\TypeRequest;
+use App\Models\Type;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class BrandController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,15 +17,15 @@ class BrandController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Brand::query();
+            $query = Type::query();
 
             return DataTables::of($query)
-                ->addColumn('action', function ($brand) {
+                ->addColumn('action', function ($type) {
                     return '
-                    <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline" href="' . route('admin.brand.edit', $brand->slug) . '">
+                    <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline" href="' . route('admin.type.edit', $type->slug) . '">
                         Edit
                     </a>
-                    <form class="block w-full" onsubmit="return confirm(\'Apakah anda yakin?\');" -block" action="' . route('admin.brand.destroy', $brand->id) . '" method="POST">
+                    <form class="block w-full" onsubmit="return confirm(\'Apakah anda yakin?\');" -block" action="' . route('admin.type.destroy', $type->id) . '" method="POST">
                     <button class="w-full px-2 py-1 text-xs text-white transition duration-500 bg-red-500 border border-red-500 rounded-md select-none ease hover:bg-red-600 focus:outline-none focus:shadow-outline" >
                         Delete
                     </button>
@@ -36,7 +36,7 @@ class BrandController extends Controller
                 ->make();
         }
 
-        return view('admin.brand.index');
+        return view('admin.type.index');
     }
 
     /**
@@ -44,20 +44,20 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brand.create');
+        return view('admin.type.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BrandRequest $request)
+    public function store(TypeRequest $request)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['name']) . '-' . Str::lower(Str::random(5));
 
-        Brand::create($data);
+        Type::create($data);
 
-        return redirect()->route('admin.brand.index')->with('success', 'Brand successfully added!');
+        return redirect()->route('admin.type.index')->with('success', 'Type successfully added!');
     }
 
     /**
@@ -73,33 +73,33 @@ class BrandController extends Controller
      */
     public function edit($slug)
     {
-        $brand = Brand::where('slug', $slug)->firstOrFail();
+        $type = Type::where('slug', $slug)->firstOrFail();
 
-        return view('admin.brand.edit', [
-            'brand' => $brand,
+        return view('admin.type.edit', [
+            'type' => $type,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(BrandRequest $request, Brand $brand)
+    public function update(TypeRequest $request, Type $type)
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['name']) . '-' . Str::lower(Str::random(5));
 
-        $brand->update($data);
+        $type->update($data);
 
-        return redirect()->route('admin.brand.index');
+        return redirect()->route('admin.type.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy(Type $type)
     {
-        $brand->delete();
+        $type->delete();
 
-        return redirect()->route('admin.brand.index');
+        return redirect()->route('admin.type.index');
     }
 }
