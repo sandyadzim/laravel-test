@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ItemController as AdminItemController;
 use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\TypeController as AdminTypeController;
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,4 +22,5 @@ Route::prefix('admin')->name('admin.')->middleware([
     Route::resource('item', AdminItemController::class);
     Route::resource('brand', AdminBrandController::class);
     Route::resource('type', AdminTypeController::class);
+    Route::resource('booking', AdminBookingController::class);
 });
