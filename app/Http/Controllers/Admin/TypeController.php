@@ -90,7 +90,7 @@ class TypeController extends Controller
 
         $type->update($data);
 
-        return redirect()->route('admin.type.index');
+        return redirect()->route('admin.type.index')->with('success', 'Type successfully updated!');
     }
 
     /**

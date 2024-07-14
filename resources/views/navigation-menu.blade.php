@@ -15,6 +15,7 @@
                     @php
                         $menu = [
                             (object) ['name' => 'Dashboard', 'route' => 'admin.dashboard'],
+                            (object) ['name' => 'Item', 'route' => 'admin.item.index'],
                             (object) ['name' => 'Brand', 'route' => 'admin.brand.index'],
                             (object) ['name' => 'Type', 'route' => 'admin.type.index'],
                         ];
