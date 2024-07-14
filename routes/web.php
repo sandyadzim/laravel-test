@@ -7,10 +7,11 @@ use App\Http\Controllers\Admin\ItemController as AdminItemController;
 use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\TypeController as AdminTypeController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
+use App\Http\Controllers\Front\LandingController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('front.index');
+Route::name('front.')->group(function () {
+    Route::get('/', [LandingController::class, 'index'])->name('index');
+});
 
 Route::prefix('admin')->name('admin.')->middleware([
     'auth:sanctum',
