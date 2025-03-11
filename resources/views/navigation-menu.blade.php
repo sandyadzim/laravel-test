@@ -19,6 +19,7 @@
                             (object) ['name' => 'Brand', 'route' => 'admin.brand.index'],
                             (object) ['name' => 'Type', 'route' => 'admin.type.index'],
                             (object) ['name' => 'Booking', 'route' => 'admin.booking.index'],
+                            (object) ['name' => 'FAQ', 'route' => 'admin.faq.index'],
                         ];
                     @endphp
 
