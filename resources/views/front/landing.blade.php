@@ -98,15 +98,14 @@
                             <p class="text-sm font-normal text-secondary">
                                 {{ $item->type ? $item->type->name : '-' }}
                             </p>
-                            <a href="#" class="absolute inset-0"></a>
-                            {{-- <a href="{{ route('front.detail', $item->slug) }}" class="absolute inset-0"></a> --}}
+                            <a href="{{ route('front.detail', $item->slug) }}" class="absolute inset-0"></a>
                         </div>
                         <img src="{{ $item->thumbnail }}" class="rounded-[18px] min-w-[216px] w-full h-[150px]"
                             alt="">
                         <div class="flex items-center justify-between gap-1">
                             <!-- Price -->
                             <p class="text-sm font-normal text-secondary">
-                                <span class="text-base font-bold text-primary">${{ $item->price }}</span>/day
+                                <span class="text-base font-bold text-primary">Rp{{ number_format($item->price, 0, ',', '.') }}</span>/day
                             </p>
                             <!-- Rating -->
                             <p class="text-dark text-xs font-semibold flex items-center gap-[2px]">

@@ -144,7 +144,7 @@
                         <div class="w-full px-3 text-right">
                             <button type="submit"
                                 class="px-4 py-2 font-bold text-white bg-green-500 rounded shadow-lg hover:bg-green-700">
-                                Simpan Type
+                                Simpan Item
                             </button>
                         </div>
                     </div>
