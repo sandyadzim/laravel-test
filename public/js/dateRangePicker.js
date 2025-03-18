@@ -46,7 +46,7 @@ document.addEventListener("alpine:init", () => {
 			const month = dateObject.getMonth() + 1;
 			const date = dateObject.getDate();
 
-			return ("0" + date).slice(-2) + " " + ("0" + month).slice(-2) + " " + year;
+			return ("0" + date).slice(-2) + "/" + ("0" + month).slice(-2) + "/" + year;
 			// return year + "-" + ("0" + month).slice(-2) + "-" + ("0" + date).slice(-2);
 		},
 
