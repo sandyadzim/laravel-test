@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookingRequest;
 use App\Models\Booking;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -19,9 +20,18 @@ class BookingController extends Controller
             $query = Booking::with(['item.brand', 'user']);
 
             return DataTables::of($query)
+                ->editColumn('start_date', function ($item) {
+                    return Carbon::parse($item->start_date)->format('d/m/Y');
+                })
+                ->editColumn('end_date', function ($item) {
+                    return Carbon::parse($item->start_date)->format('d/m/Y');
+                })
+                ->editColumn('total_price', function ($item) {
+                    return 'Rp' . number_format($item->total_price, 0, ',', '.');
+                })
                 ->addColumn('action', function ($item) {
                     return '
-                    <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline" href="' . route('admin.booking.edit', $item->slug) . '">
+                    <a class="block w-full px-2 py-1 mb-1 text-xs text-center text-white transition duration-500 bg-gray-700 border border-gray-700 rounded-md select-none ease hover:bg-gray-800 focus:outline-none focus:shadow-outline" href="' . route('admin.booking.edit', $item->id) . '">
                         Edit
                     </a>
                     <form class="block w-full" onsubmit="return confirm(\'Apakah anda yakin?\');" -block" action="' . route('admin.booking.destroy', $item->id) . '" method="POST">
@@ -65,10 +75,8 @@ class BookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($slug)
+    public function edit(Booking $booking)
     {
-        $booking = Booking::where('slug', $slug)->firstOrFail();
-
         return view('admin.booking.edit', compact('booking'));
     }
 
