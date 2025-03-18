@@ -93,8 +93,7 @@
                                 </div>
                                 <div class="w-full">
                                     <div class="p-1 rounded-full bg-primary group">
-                                        <a href="#" class="btn-primary" />
-                                        {{-- <a href="{{ route('front.checkout', $item->slug) }}" class="btn-primary"> --}}
+                                        <a href="{{ route('front.checkout', $item->slug) }}" class="btn-primary">
                                         <p>
                                             Rent Now
                                         </p>
