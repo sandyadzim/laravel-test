@@ -11,14 +11,19 @@ use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\DetailController;
 use App\Http\Controllers\Front\LandingController;
+use App\Http\Controllers\Front\PaymentController;
 
 Route::name('front.')->group(function () {
     Route::get('/', [LandingController::class, 'index'])->name('index');
     Route::get('/detail/{slug}', [DetailController::class, 'index'])->name('detail');
 
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+
     Route::group(['middleware' => 'auth'], function() {
         Route::get('/checkout/{slug}', [CheckoutController::class, 'index'])->name('checkout');
         Route::post('/checkout/{slug}', [CheckoutController::class, 'store'])->name('checkout.store');
+        Route::get('/payment/{bookingId}', [PaymentController::class, 'index'])->name('payment');
+        Route::post('/payment/{bookingId}', [PaymentController::class, 'update'])->name('payment.update');
     });
 });
 
